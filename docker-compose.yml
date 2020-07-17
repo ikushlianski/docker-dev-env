@@ -9,6 +9,16 @@ services:
       - 50000:50000
     container_name: jenkins
     volumes:
-      - ~/webdata/jenkins/jenkins-home:/var/jenkins_home
+      - ~/webdata/local-dev-env/jenkins-home:/var/jenkins_home
       - /var/run/docker.sock:/var/run/docker.sock
       - /usr/local/bin/docker:/usr/local/bin/docker
+  postgresdb:
+    image: postgres
+    ports:
+      - 5432:5432
+    container_name: postgres
+    env_file:
+      - .env
+    volumes:
+      - ~/webdata/local-dev-env/postgres-files:/var/lib/postgresql/data/
+
